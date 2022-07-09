@@ -1,0 +1,116 @@
+html,
+body {
+  background-color: rgba(0, 0, 0, 0.8);
+  box-sizing: border-box;
+  color: rgba(255, 255, 255, 1);
+}
+
+html {
+  height: 100%;
+}
+body {
+  min-height: 100%;
+}
+
+.app {
+  min-height: 100%;
+
+  .headerWrap {
+    background-image: linear-gradient(#000000, #000000), linear-gradient(#ffffff, #ffffff);
+    background-size: 100% calc(100% - 1px), 100% 100%;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .tabs {
+      display: flex;
+      flex-direction: row;
+      gap: 20px;
+
+      .tab {
+        background-color: black;
+        &:hover {
+          background-color: #686868;
+        }
+
+        cursor: pointer;
+        padding: 10px 20px;
+        border: 1px white solid;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+
+        &.active {
+          border-bottom: none;
+        }
+      }
+    }
+  }
+
+  .footerWrap {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0);
+    border-top: 1px solid #ffffff;
+    padding: 20px 0;
+  }
+
+  .interactive {
+    width: 100%;
+    padding: 20px;
+    // border-top: 1px solid white;
+    .dataBreak {
+      margin: 40px auto 10px auto;
+      max-width: min-content;
+
+      + .dataTable{
+        border-top: 1px solid white;
+        border-radius: 7px;
+      }
+    }
+
+    .dataTable {
+      margin: 0 auto;
+
+      .editBtn {
+        color: yellow;
+        cursor: pointer;
+      }
+      .deleteBtn {
+        color: red;
+        cursor: pointer;
+      }
+      .addBtn {
+        color: green;
+        cursor: pointer;
+      }
+
+      thead {
+        th {
+          padding: 5px 10px;
+          min-width: 35px;
+        }
+      }
+
+      tbody {
+        td {
+          padding: 5px 10px;
+          border-right: 1px solid wheat;
+          border-bottom: 1px solid wheat;
+          border-radius: 7px;
+          min-width: 35px;
+
+          &:global {
+            &.openEditor {
+              border-bottom-color: yellow;
+              border-right-color: yellow;
+            }
+          }
+        }
+      }
+    }
+  }
+}
