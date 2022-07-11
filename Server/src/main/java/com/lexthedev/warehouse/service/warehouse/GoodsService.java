@@ -5,6 +5,7 @@ import com.lexthedev.warehouse.exceptions.AlreadyExistsException;
 import com.lexthedev.warehouse.exceptions.NotFoundException;
 import com.lexthedev.warehouse.model.warehouse.Goods;
 import com.lexthedev.warehouse.model.warehouse.GoodsDTO;
+import com.lexthedev.warehouse.repository.document.GoodsTransactionRepo;
 import com.lexthedev.warehouse.repository.warehouse.GoodsRepo;
 import com.lexthedev.warehouse.repository.warehouse.ProductRepo;
 import com.lexthedev.warehouse.repository.warehouse.StorageRepo;
@@ -22,6 +23,8 @@ public class GoodsService {
     ProductRepo productRepo;
     @Autowired
     StorageRepo storageRepo;
+    @Autowired
+    GoodsTransactionRepo goodsTransactionRepo;
 
     public Goods getOne(Long id) throws NotFoundException {
         GoodsEntity product = goodsRepo.findById(id).get();
@@ -58,6 +61,7 @@ public class GoodsService {
         goods.setValue(goodsDTO.getValue());
         goods.setProduct(productRepo.findById(goodsDTO.getProduct_id()).get());
         goods.setCell(storageRepo.findById(goodsDTO.getCell_id()).get());
+        goods.setTransaction(goodsTransactionRepo.findById(goodsDTO.getTransaction_id()).get());
         return goods;
     }
 }

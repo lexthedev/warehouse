@@ -9,6 +9,15 @@ public class GoodsDTO {
     private Long product_id;
     private Integer value;
     private Long cell_id;
+    private Long transaction_id;
+
+    public Long getTransaction_id() {
+        return transaction_id;
+    }
+
+    public void setTransaction_id(Long transaction_id) {
+        this.transaction_id = transaction_id;
+    }
 
     public Long getId() {
         return id;
@@ -44,20 +53,4 @@ public class GoodsDTO {
 
     public GoodsDTO() {
     }
-
-    //    public GoodsEntity toEntity(GoodsDTO goodsDTO){
-//        GoodsEntity goods = new GoodsEntity();
-//        goods.setId(goods.getId());
-//        goods.setProduct(productRepo.findById(goodsDTO.getProduct_id()).get());
-//        goods.setCell(storageRepo.findById(goodsDTO.getCell_id()).get());
-//        return goods;
-//    }
-//    public GoodsEntity toEntity() {
-//        GoodsEntity goods = new GoodsEntity();
-//        goods.setId(this.getId());
-//        goods.setValue(this.value);
-//        goods.setProduct(productRepo.findById(this.getProduct_id()).get());
-//        goods.setCell(storageRepo.findById(this.getCell_id()).get());
-//        return goods;
-//    }
 }

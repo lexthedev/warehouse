@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from '../../App.module.scss';
 import { TABS } from '../../constants/defaults';
+import Help from '../help/Help';
 
 interface IHeaderProps {
     activeTab: TABS;
@@ -24,6 +25,7 @@ function Header(props: IHeaderProps) {
 
     return <div className={styles.headerWrap}>
         <h1>TOTALLY NEW WAREHOUSE</h1>
+        <Help />
         <nav className={styles.tabs}>
             {tabs}
         </nav>

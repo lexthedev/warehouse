@@ -13,5 +13,6 @@ export interface IGoodsEntity {
     id?: number,
     value: number,
     product: IProduct,
-    cell: ICell
+    cell: ICell,
+    transactionType: string
 }

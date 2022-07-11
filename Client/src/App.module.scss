@@ -3,6 +3,10 @@ body {
   background-color: rgba(0, 0, 0, 0.8);
   box-sizing: border-box;
   color: rgba(255, 255, 255, 1);
+
+  * {
+    box-sizing: border-box;
+  }
 }
 
 html {
@@ -22,6 +26,51 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
+
+    .helpWrap {
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      justify-items: right;
+
+      .helpBtn {
+        cursor: pointer;
+        display: flex;
+        justify-self: right;
+        border: 2px solid white;
+        font-size: 25px;
+        width: 30px;
+        height: 30px;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+      }
+
+      .helpText {
+        display: none;
+        position: absolute;
+        top: 40px;
+        right: 0px;
+        z-index: 3;
+        padding: 30px;
+        border: 1px solid white;
+        background: #000;
+        width: 400px;
+        overflow-y: auto;
+
+        &.show {
+          display: block;
+        }
+
+        .closeHelp {
+          cursor: pointer;
+          position: absolute;
+          top: 10px;
+          right: 10px;
+        }
+      }
+    }
 
     .tabs {
       display: flex;
@@ -66,7 +115,7 @@ body {
       margin: 40px auto 10px auto;
       max-width: min-content;
 
-      + .dataTable{
+      + .dataTable {
         border-top: 1px solid white;
         border-radius: 7px;
       }

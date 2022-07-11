@@ -114,6 +114,7 @@ function Goods() {
         <table className={styles.dataTable}>
             <thead className={styles.theader}>
                 <tr>
+                    <th></th>
                     <th>Product</th>
                     <th>Value</th>
                     <th>Cell</th>
@@ -135,6 +136,7 @@ function Goods() {
                     }
                     return (
                         <tr className={styles.tr} key={id}>
+                            <td>{elem.transactionType === "BUY" ? "+" : "-"}</td>
                             <td className={thisEdit ? "openEditor" : ''}>
                                 {thisEdit ? getProductList(id as number) : <div>{elem.product?.title}</div>}
                             </td>
@@ -154,7 +156,7 @@ function Goods() {
                 })}
                 {!addNew && <tr>
                     <td className={styles.addBtn}
-                        colSpan={5}
+                        colSpan={6}
                         onClick={() => { setAddNew(true) }}>Add new</td>
                 </tr>}
                 {addNew && <tr className={styles.tr} key={0}>

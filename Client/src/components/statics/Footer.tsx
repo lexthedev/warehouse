@@ -2,12 +2,6 @@ import React from 'react';
 import styles from '../../App.module.scss';
 import { TABS } from '../../constants/defaults';
 
-// interface IHeaderProps {
-//     activeTab: TABS;
-//     setActiveTab: (TABS: TABS) => any;
-// }
-
-// function Footer(props: IHeaderProps) {
 function Footer() {
 
     return <div className={styles.footerWrap}>
