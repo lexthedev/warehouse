@@ -74,8 +74,8 @@ public class GoodsTransactionController {
         }
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity delete(@PathVariable Long id) {
+    @DeleteMapping
+    public ResponseEntity delete(@RequestParam Long id) {
         try {
             return ResponseEntity.ok(goodsTransactionService.delete(id));
         } catch (Exception e) {

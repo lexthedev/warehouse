@@ -73,6 +73,7 @@ public class GoodsTransactionService {
         GoodsTransactionEntity goodsTransactionEntityToSave = this.toEntity(goods);
         GoodsTransactionEntity goodsTransactionEntity = goodsTransactionRepo.save(goodsTransactionEntityToSave);
         goods.getGoods().forEach(goodsDTO -> {
+            goodsDTO.setTransaction_id(goodsTransactionEntity.getId());
             GoodsEntity goodsEntity = goodsService.toEntity(goodsDTO);
             goodsEntity.setTransaction(goodsTransactionEntity);
             goodsRepo.save(goodsEntity);

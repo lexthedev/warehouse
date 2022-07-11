@@ -50,7 +50,6 @@ public class ClientController {
         }
     }
 
-
     @DeleteMapping
     public ResponseEntity delete(@RequestParam Long id) {
         try {
