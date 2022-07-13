@@ -3,13 +3,13 @@ package com.lexthedev.warehouse.model.warehouse;
 import com.lexthedev.warehouse.entity.warehouse.GoodsEntity;
 import com.lexthedev.warehouse.entity.warehouse.StorageEntity;
 
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
+import java.util.List;
 
 public class Storage {
     private Long id;
     private String cellName;
-    @OneToOne
-    private GoodsEntity goods;
+    private List<GoodsEntity> goods;
 
     public static Storage toModel(StorageEntity storage){
         Storage model = new Storage();
@@ -38,11 +38,11 @@ public class Storage {
         this.cellName = cellName;
     }
 
-    public GoodsEntity getGoods() {
+    public List<GoodsEntity> getGoods() {
         return goods;
     }
 
-    public void setGoods(GoodsEntity goods) {
+    public void setGoods(List<GoodsEntity> goods) {
         this.goods = goods;
     }
 }

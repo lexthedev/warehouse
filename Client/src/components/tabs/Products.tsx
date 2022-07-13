@@ -41,7 +41,7 @@ function Products() {
         const editFields = document.querySelectorAll(`table .openEditor > *`);
         const data = {
             "title": editFields[0].textContent as string,
-            "type": editFields[1].textContent as string,
+            "type": (editFields[1] as HTMLOptionElement).value,
         }
         if (id < 0) { //new
             ProductService.create(data).then((data) => {
@@ -68,11 +68,11 @@ function Products() {
         });
     }
 
-    function getTypeList(type: string): JSX.Element {
+    function getTypeList(type: string = ''): JSX.Element {
         return (
             <select contentEditable={true}
-                name="cellList"
-                id="cellList">
+                name="typeList"
+                id="typeList">
                 {types.map((elem) => {
                     return <option
                         value={elem}
@@ -128,7 +128,9 @@ function Products() {
                 </tr>}
                 {addNew && <tr className={styles.tr} key={0}>
                     <td className='openEditor'><div contentEditable={"true"}></div></td>
-                    <td className='openEditor'><div contentEditable={"true"}></div></td>
+                    <td className={'openEditor'}>
+                        {getTypeList()}
+                    </td>
                     <td onClick={() => { saveEdit(-1) }} className={styles.editBtn}>Save</td>
                     <td onClick={cancelEdit} className={styles.deleteBtn}>cancel</td>
                 </tr>}

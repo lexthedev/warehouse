@@ -1,9 +1,7 @@
 package com.lexthedev.warehouse.entity.warehouse;
 
-import org.springframework.boot.context.properties.bind.DefaultValue;
-import org.springframework.data.repository.CrudRepository;
-
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "storage")
@@ -13,9 +11,9 @@ public class StorageEntity {
     private Long id;
     private String cellName;
 //    @OneToOne(mappedBy = "cell")
-    @OneToOne
+    @OneToMany
     @JoinColumn(name = "goods_id")
-    private GoodsEntity goods;
+    private List<GoodsEntity> goods;
     public Long getId() {
         return id;
     }
@@ -32,11 +30,11 @@ public class StorageEntity {
         this.cellName = cellName;
     }
 
-    public GoodsEntity getGoods() {
+    public List<GoodsEntity> getGoods() {
         return goods;
     }
 
-    public void setGoods(GoodsEntity goods) {
+    public void setGoods(List<GoodsEntity> goods) {
         this.goods = goods;
     }
 
