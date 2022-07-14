@@ -8,9 +8,33 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  <>
+    <style>
+      {`@media print
+      {td[class^='App_editBtn'],
+      td[class^='App_deleteBtn'],
+      td[class^='App_addBtn'],
+      div[class^='App_helpWrap']
+        {
+        display: none;
+        }
+        * {
+          color: #000000
+        }
+        div[class^='App_tab']{
+          color: #FFFFF0;
+        }
+        div[class*='App_active'] {
+          color: #000000;
+          font-weight: 900;
+        }
+
+      }`}
+    </style>
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  </>
 );
 
 // If you want to start measuring performance in your app, pass a function
