@@ -1,10 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import styles from '../../App.module.scss';
+import { LANGUAGES } from '../../constants/defaults';
+import { content } from '../../constants/text';
 import { IClient } from "../../models/Clients";
 import ClientService from '../../services/ClientService';
 
-function Clients() {
+interface IClientProps {
+    language: LANGUAGES;
+}
 
+function Clients(props: IClientProps) {
+
+    const language = props.language;
     const [clients, setClients] = useState([] as IClient[]);
     const [addNew, setAddNew] = useState(false);
     const [editId, setEditId] = useState(-1 as number);
@@ -67,10 +74,10 @@ function Clients() {
         <table className={styles.dataTable}>
             <thead className={styles.theader}>
                 <tr>
-                    <th>Company name</th>
-                    <th>Name</th>
-                    <th>Phone</th>
-                    <th>Email</th>
+                    <th>{content.CompanyName[language]}</th>
+                    <th>{content.Name[language]}</th>
+                    <th>{content.Phone[language]}</th>
+                    <th>{content.Email[language]}</th>
                     <th></th>
                     <th></th>
                 </tr>
@@ -82,10 +89,10 @@ function Clients() {
                     let thisEdit = editId === id;
                     let buttonText = '';
                     if (showEdit) {
-                        buttonText = 'Edit';
+                        buttonText = content.Edit[language];
                     }
                     if (thisEdit) {
-                        buttonText = 'Save';
+                        buttonText = content.Save[language]
                     }
                     return (
                         <tr className={styles.tr} key={id}>
@@ -98,23 +105,23 @@ function Clients() {
                                     if (showEdit) { setEdit(id) } else { saveEdit(id) };
                                 }}>{buttonText}</td>
                             {thisEdit
-                                ? <td onClick={cancelEdit} className={styles.deleteBtn}>cancel</td>
-                                : <td onClick={() => { deleteElement(id as number) }} className={styles.deleteBtn}>Delete</td>}
+                                ? <td onClick={cancelEdit} className={styles.deleteBtn}>{content.Cancel[language]}</td>
+                                : <td onClick={() => { deleteElement(id as number) }} className={styles.deleteBtn}>{content.Delete[language]}</td>}
                         </tr>
                     )
                 })}
                 {!addNew && <tr>
                     <td className={styles.addBtn}
                         colSpan={6}
-                        onClick={() => { setAddNew(true) }}>Add new</td>
+                        onClick={() => { setAddNew(true) }}>{content.AddNew[language]}</td>
                 </tr>}
                 {addNew && <tr className={styles.tr} key={0}>
                     <td className='openEditor'><div contentEditable={"true"}></div></td>
                     <td className='openEditor'><div contentEditable={"true"}></div></td>
                     <td className='openEditor'><div contentEditable={"true"}></div></td>
                     <td className='openEditor'><div contentEditable={"true"}></div></td>
-                    <td onClick={() => { saveEdit(-1) }} className={styles.editBtn}>Save</td>
-                    <td onClick={cancelEdit} className={styles.deleteBtn}>cancel</td>
+                    <td onClick={() => { saveEdit(-1) }} className={styles.editBtn}>{content.Save[language]}</td>
+                    <td onClick={cancelEdit} className={styles.deleteBtn}>{content.Cancel[language]}</td>
                 </tr>}
             </tbody>
         </table>

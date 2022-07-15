@@ -28,46 +28,61 @@ body {
     align-items: center;
     position: relative;
 
-    .helpWrap {
+    .floatRight {
       position: absolute;
       right: 20px;
       top: 20px;
       justify-items: right;
+      display: flex;
+      flex-direction: row;
+      gap: 20px;
+      align-items: center;
 
-      .helpBtn {
-        cursor: pointer;
+      .langSwitcher {
+        // position: absolute;
         display: flex;
-        justify-self: right;
-        border: 2px solid white;
-        font-size: 25px;
-        width: 30px;
-        height: 30px;
-        justify-content: center;
-        align-items: center;
-        border-radius: 50%;
+        flex-direction: row;
+        gap: 10px;
+        left: 50%;
+        top: 10px;
       }
 
-      .helpText {
-        display: none;
-        position: absolute;
-        top: 40px;
-        right: 0px;
-        z-index: 3;
-        padding: 30px;
-        border: 1px solid white;
-        background: #000;
-        width: 400px;
-        overflow-y: auto;
-
-        &.show {
-          display: block;
+      .helpWrap {
+        .helpBtn {
+          cursor: pointer;
+          display: flex;
+          justify-self: right;
+          border: 2px solid white;
+          font-size: 25px;
+          width: 30px;
+          height: 30px;
+          justify-content: center;
+          align-items: center;
+          border-radius: 50%;
         }
 
-        .closeHelp {
-          cursor: pointer;
+        .helpText {
+          display: none;
           position: absolute;
-          top: 10px;
-          right: 10px;
+          top: 40px;
+          right: 0px;
+          z-index: 3;
+          padding: 30px;
+          border: 1px solid white;
+          background: #000;
+          width: 400px;
+          overflow-y: auto;
+
+          &.show {
+            display: block;
+          }
+
+          .closeHelp {
+            cursor: pointer;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+          }
         }
       }
     }
@@ -110,7 +125,6 @@ body {
   .interactive {
     width: 100%;
     padding: 20px;
-    // border-top: 1px solid white;
     .dataBreak {
       margin: 40px auto 10px auto;
       max-width: min-content;

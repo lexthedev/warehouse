@@ -1,11 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import styles from '../../App.module.scss';
+import { LANGUAGES } from '../../constants/defaults';
+import { content } from '../../constants/text';
 import { ICell } from "../../models/Storage";
 import StorageService from '../../services/StorageService';
 
+interface IStorageProps {
+    language: LANGUAGES;
+}
 
-function Storages() {
+function Storage(props: IStorageProps) {
 
+    const language = props.language;
     const [cells, setCells] = useState([] as ICell[]);
     const [addNew, setAddNew] = useState(false);
     const [editId, setEditId] = useState(-1 as number);
@@ -65,7 +71,7 @@ function Storages() {
         <table className={styles.dataTable}>
             <thead className={styles.theader}>
                 <tr>
-                    <th>Cell name</th>
+                    <th>{content.CellName[language]}</th>
                     <th></th>
                     <th></th>
                 </tr>
@@ -77,10 +83,10 @@ function Storages() {
                     let thisEdit = editId === id;
                     let buttonText = '';
                     if (showEdit) {
-                        buttonText = 'Edit';
+                        buttonText = content.Edit[language];
                     }
                     if (thisEdit) {
-                        buttonText = 'Save';
+                        buttonText = content.Save[language];
                     }
                     return (
                         <tr className={styles.tr} key={id}>
@@ -90,24 +96,24 @@ function Storages() {
                                     if (showEdit) { setEdit(id) } else { saveEdit(id) };
                                 }}>{buttonText}</td>
                             {thisEdit
-                                ? <td onClick={cancelEdit} className={styles.deleteBtn}>cancel</td>
-                                : <td onClick={() => { deleteElement(id as number) }} className={styles.deleteBtn}>Delete</td>}
+                                ? <td onClick={cancelEdit} className={styles.deleteBtn}>{content.Cancel[language]}</td>
+                                : <td onClick={() => { deleteElement(id as number) }} className={styles.deleteBtn}>{content.Delete[language]}</td>}
                         </tr>
                     )
                 })}
                 {!addNew && <tr>
                     <td className={styles.addBtn}
                         colSpan={3}
-                        onClick={() => { setAddNew(true) }}>Add new</td>
+                        onClick={() => { setAddNew(true) }}>{content.AddNew[language]}</td>
                 </tr>}
                 {addNew && <tr className={styles.tr} key={0}>
                     <td className='openEditor'><div contentEditable={"true"}></div></td>
-                    <td onClick={() => { saveEdit(-1) }} className={styles.editBtn}>Save</td>
-                    <td onClick={cancelEdit} className={styles.deleteBtn}>cancel</td>
+                    <td onClick={() => { saveEdit(-1) }} className={styles.editBtn}>{content.Save[language]}</td>
+                    <td onClick={cancelEdit} className={styles.deleteBtn}>{content.Cancel[language]}</td>
                 </tr>}
             </tbody>
         </table>
     </div >;
 }
 
-export default Storages;
+export default Storage;

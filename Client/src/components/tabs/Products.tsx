@@ -1,12 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import styles from '../../App.module.scss';
+import { LANGUAGES } from '../../constants/defaults';
+import { content } from '../../constants/text';
 import { IProduct } from "../../models/Products";
 import { ISettings } from '../../models/Settings';
 import ProductService from '../../services/ProductService';
 import SettingsService from '../../services/SettingsService';
 
-function Products() {
+interface IProducstsProps {
+    language: LANGUAGES;
+}
 
+function Products(props: IProducstsProps) {
+
+    const language = props.language;
     const [products, setProducts] = useState([] as IProduct[]);
     const [types, setTypes] = useState([] as string[]);
     const [addNew, setAddNew] = useState(false);
@@ -77,7 +84,7 @@ function Products() {
                     return <option
                         value={elem}
                         selected={type === elem}>
-                        {elem}
+                        {content[elem][language]}
                     </option>
                 })}
             </select>)
@@ -87,8 +94,8 @@ function Products() {
         <table className={styles.dataTable}>
             <thead className={styles.theader}>
                 <tr>
-                    <th>Name</th>
-                    <th>type</th>
+                    <th>{content.Name[language]}</th>
+                    <th>{content.Type[language]}</th>
                     <th></th>
                     <th></th>
                 </tr>
@@ -100,39 +107,39 @@ function Products() {
                     let thisEdit = editId === id;
                     let buttonText = '';
                     if (showEdit) {
-                        buttonText = 'Edit';
+                        buttonText = content.Edit[language];
                     }
                     if (thisEdit) {
-                        buttonText = 'Save';
+                        buttonText = content.Save[language]
                     }
                     return (
                         <tr className={styles.tr} key={id}>
                             <td className={thisEdit ? "openEditor" : ''}><div contentEditable={thisEdit}>{elem.title}</div></td>
                             <td className={thisEdit ? "openEditor" : ''}>
-                                {thisEdit ? getTypeList(elem.type) : <div>{elem.type}</div>}
+                                {thisEdit ? getTypeList(elem.type) : <div>{content[elem.type][language]}</div>}
                             </td>
                             <td className={styles.editBtn}
                                 onClick={() => {
                                     if (showEdit) { setEdit(id) } else { saveEdit(id) };
                                 }}>{buttonText}</td>
                             {thisEdit
-                                ? <td onClick={cancelEdit} className={styles.deleteBtn}>cancel</td>
-                                : <td onClick={() => { deleteElement(id as number) }} className={styles.deleteBtn}>Delete</td>}
+                                ? <td onClick={cancelEdit} className={styles.deleteBtn}>{content.Cancel[language]}</td>
+                                : <td onClick={() => { deleteElement(id as number) }} className={styles.deleteBtn}>{content.Delete[language]}</td>}
                         </tr>
                     )
                 })}
                 {!addNew && <tr>
                     <td className={styles.addBtn}
                         colSpan={4}
-                        onClick={() => { setAddNew(true) }}>Add new</td>
+                        onClick={() => { setAddNew(true) }}>{content.AddNew[language]}</td>
                 </tr>}
                 {addNew && <tr className={styles.tr} key={0}>
                     <td className='openEditor'><div contentEditable={"true"}></div></td>
                     <td className={'openEditor'}>
                         {getTypeList()}
                     </td>
-                    <td onClick={() => { saveEdit(-1) }} className={styles.editBtn}>Save</td>
-                    <td onClick={cancelEdit} className={styles.deleteBtn}>cancel</td>
+                    <td onClick={() => { saveEdit(-1) }} className={styles.editBtn}>{content.Save[language]}</td>
+                    <td onClick={cancelEdit} className={styles.deleteBtn}>{content.Cancel[language]}</td>
                 </tr>}
             </tbody>
         </table>

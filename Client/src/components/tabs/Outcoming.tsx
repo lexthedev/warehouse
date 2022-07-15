@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from '../../App.module.scss';
+import { LANGUAGES } from '../../constants/defaults';
+import { content } from '../../constants/text';
 import { IClient } from '../../models/Clients';
 import { IDocument } from '../../models/Documents';
 import { IGoods } from '../../models/Goods';
@@ -10,8 +12,13 @@ import DocumentService from '../../services/DocumentService';
 import ProductService from '../../services/ProductService';
 import StorageService from '../../services/StorageService';
 
-function Incoming() {
+interface IIncomingProps {
+    language: LANGUAGES;
+}
 
+function Incoming(props: IIncomingProps) {
+
+    const language = props.language;
     const [documents, setDocuments] = useState([] as IDocument[]);
     const [clients, setClients] = useState([] as IClient[]);
     const [cells, setCells] = useState([] as ICell[]);
@@ -210,9 +217,9 @@ function Incoming() {
                 <table className={styles.dataTable}>
                     <thead className={styles.theader}>
                         <tr>
-                            <th>Id</th>
-                            <th>Client</th>
-                            <th>Date</th>
+                            <th>{content.Id[language]}</th>
+                            <th>{content.Client[language]}</th>
+                            <th>{content.Date[language]}</th>
                             <th></th>
                             <th></th>
                         </tr>
@@ -222,19 +229,19 @@ function Incoming() {
                             <td><div>{editId === -1 ? '' : editId}</div></td>
                             <td>{getClientList(editId as number)}</td>
                             <td><div>{new Date(editDoc.date).toLocaleDateString()}</div></td>
-                            <td onClick={() => { saveEdit(editId) }} className={styles.editBtn}>Save</td>
-                            <td onClick={() => { cancelEdit() }} className={styles.editBtn}>Cancel</td>
-                            <td onClick={() => { deleteDocElement(editId) }} className={styles.deleteBtn}>Delete</td>
+                            <td onClick={() => { saveEdit(editId) }} className={styles.editBtn}>{content.Save[language]}</td>
+                            <td onClick={() => { cancelEdit() }} className={styles.editBtn}>{content.Cancel[language]}</td>
+                            <td onClick={() => { deleteDocElement(editId) }} className={styles.deleteBtn}>{content.Delete[language]}</td>
                         </tr>}
                     </tbody>
                 </table>
-                <div className={styles.dataBreak}>Goods:</div>
+                <div className={styles.dataBreak}>{content.Goods[language]}:</div>
                 <table className={styles.dataTable}>
                     <thead className={styles.theader}>
                         <tr>
-                            <th>Product</th>
-                            <th>Value</th>
-                            <th>Cell</th>
+                            <th>{content.Product[language]}</th>
+                            <th>{content.Value[language]}</th>
+                            <th>{content.Cell[language]}</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -250,14 +257,14 @@ function Incoming() {
                                     <td className={"openEditor"}>
                                         {getCellList(elem.cell_id as number)}
                                     </td>
-                                    <td onClick={() => { deleteGoodElement(arrId) }} className={styles.deleteBtn}>Delete</td>
+                                    <td onClick={() => { deleteGoodElement(arrId) }} className={styles.deleteBtn}>{content.Delete[language]}</td>
                                 </tr>
                             )
                         })}
                         <tr>
                             <td className={styles.addBtn}
                                 colSpan={4}
-                                onClick={() => { addGoods() }}>Add new</td>
+                                onClick={() => { addGoods() }}>{content.AddNew[language]}</td>
                         </tr>
                     </tbody>
                 </table> </>
@@ -266,9 +273,9 @@ function Incoming() {
             !addNew && editId === -1 && <table className={styles.dataTable}>
                 <thead className={styles.theader}>
                     <tr>
-                        <th>Id</th>
-                        <th>Client</th>
-                        <th>Date</th>
+                        <th>{content.Id[language]}</th>
+                        <th>{content.Client[language]}</th>
+                        <th>{content.Date[language]}</th>
                         <th></th>
                         <th></th>
                     </tr>
@@ -281,15 +288,15 @@ function Incoming() {
                                 <td>{elem.id}</td>
                                 <td>{`${client.name} (${client.companyName})`}</td>
                                 <td>{new Date(elem.date).toLocaleDateString()}</td>
-                                <td onClick={() => { setEdit(elem.id) }} className={styles.editBtn}>Edit</td>
-                                <td onClick={() => { deleteDocElement(elem.id as number) }} className={styles.deleteBtn}>Delete</td>
+                                <td onClick={() => { setEdit(elem.id) }} className={styles.editBtn}>{content.Edit[language]}</td>
+                                <td onClick={() => { deleteDocElement(elem.id as number) }} className={styles.deleteBtn}>{content.Delete[language]}</td>
                             </tr>
                         )
                     })}
                     <tr>
                         <td className={styles.addBtn}
                             colSpan={5}
-                            onClick={() => { createNewDoc() }}>Add new</td>
+                            onClick={() => { createNewDoc() }}>{content.AddNew[language]}</td>
                     </tr>
                 </tbody>
             </table>

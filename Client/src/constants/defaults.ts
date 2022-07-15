@@ -7,3 +7,11 @@ export enum TABS {
     Outcoming = 'Outcoming',
     Goods = 'Goods'
 }
+export enum LANGUAGES {
+    EN = 'EN',
+    RU = 'RU'
+}
+
+export type textContent = {
+    [s: string]: Record<string, string>;
+}

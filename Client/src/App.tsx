@@ -7,24 +7,27 @@ import Goods from './components/tabs/Goods';
 import Incoming from './components/tabs/Incoming';
 import Outcoming from './components/tabs/Outcoming';
 import Products from './components/tabs/Products';
-import Storages from './components/tabs/Storages';
-import { TABS } from './constants/defaults';
+import Storage from './components/tabs/Storage';
+import { LANGUAGES, TABS } from './constants/defaults';
 
 function App() {
 
   const [activeTab, setActiveTab] = useState(TABS.Outcoming);
+  const [language, setlang] = useState(LANGUAGES.EN);
 
   return (<div className={styles.app}>
     <Header
       activeTab={activeTab}
-      setActiveTab={setActiveTab} />
+      setActiveTab={setActiveTab}
+      switchLang={setlang}
+      language={language} />
     <div className={styles.interactive}>
-      {activeTab === TABS.Products && <Products />}
-      {activeTab === TABS.Clients && <Clients />}
-      {activeTab === TABS.Storage && <Storages />}
-      {activeTab === TABS.Incoming && <Incoming />}
-      {activeTab === TABS.Outcoming && <Outcoming />}
-      {activeTab === TABS.Goods && <Goods />}
+      {activeTab === TABS.Products && <Products language={language} />}
+      {activeTab === TABS.Clients && <Clients language={language} />}
+      {activeTab === TABS.Storage && <Storage language={language} />}
+      {activeTab === TABS.Incoming && <Incoming language={language} />}
+      {activeTab === TABS.Outcoming && <Outcoming language={language} />}
+      {activeTab === TABS.Goods && <Goods language={language} />}
     </div>
     <Footer />
   </div>
