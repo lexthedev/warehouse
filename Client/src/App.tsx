@@ -21,7 +21,7 @@ function App() {
       setActiveTab={setActiveTab}
       switchLang={setlang}
       language={language} />
-    <div className={styles.interactive}>
+    <div>
       {activeTab === TABS.Products && <Products language={language} />}
       {activeTab === TABS.Clients && <Clients language={language} />}
       {activeTab === TABS.Storage && <Storage language={language} />}
