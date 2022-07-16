@@ -19,7 +19,6 @@ function Goods(props: IGoodsProps) {
     const [goods, setGoods] = useState([] as IGoodsEntity[]);
     const [products, setProducts] = useState([] as IProduct[]);
     const [cells, setCells] = useState([] as ICell[]);
-    const [addNew, setAddNew] = useState(false);
     const [editId, setEditId] = useState(-1 as number);
     useEffect(() => { getAll(); }, []);
 
@@ -47,12 +46,10 @@ function Goods(props: IGoodsProps) {
     function refreshState() {
         getAll();
         setEditId(-1);
-        setAddNew(false);
     }
 
     function cancelEdit() {
         setEditId(-1);
-        setAddNew(false);
     }
 
     function saveEdit(id: number = -1) {
@@ -60,7 +57,8 @@ function Goods(props: IGoodsProps) {
         const data = {
             product_id: Number(editFields[0].textContent) | Number((editFields[0] as HTMLInputElement).value) as number,
             value: Number(editFields[1].textContent) as number,
-            cell_id: Number(editFields[2].textContent) | Number((editFields[2] as HTMLInputElement).value) as number
+            cell_id: Number(editFields[2].textContent) | Number((editFields[2] as HTMLInputElement).value) as number,
+            transaction_id: Number(editFields[3].textContent) | Number((editFields[3] as HTMLInputElement).value) as number,
         } as IGoods
         if (id < 0) { //new
             Goodservice.create(data).then((data) => {
@@ -151,6 +149,9 @@ function Goods(props: IGoodsProps) {
                             <td className={thisEdit ? "openEditor" : ''}>
                                 {thisEdit ? getCellList(id as number) : <div>{elem.cell?.cellName}</div>}
                             </td>
+                            <td className={thisEdit ? "openEditor" : ''} hidden>
+                                <div>{elem.transaction_id}</div>
+                            </td>
                             <td className={styles.editBtn}
                                 onClick={() => {
                                     if (showEdit) { setEdit(id) } else { saveEdit(id) };
@@ -161,18 +162,6 @@ function Goods(props: IGoodsProps) {
                         </tr>
                     )
                 })}
-                {!addNew && <tr>
-                    <td className={styles.addBtn}
-                        colSpan={6}
-                        onClick={() => { setAddNew(true) }}>{content.AddNew[language]}</td>
-                </tr>}
-                {addNew && <tr className={styles.tr} key={0}>
-                    <td className='openEditor'><div contentEditable={"true"}></div></td>
-                    <td className='openEditor'><div contentEditable={"true"}></div></td>
-                    <td className='openEditor'><div contentEditable={"true"}></div></td>
-                    <td onClick={() => { saveEdit(-1) }} className={styles.editBtn}>{content.Save[language]}</td>
-                    <td onClick={cancelEdit} className={styles.deleteBtn}>{content.Cancel[language]}</td>
-                </tr>}
             </tbody>
         </table>
     </div >;

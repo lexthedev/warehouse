@@ -47,7 +47,7 @@ public class GoodsController {
     @PutMapping
     public ResponseEntity edit(@RequestBody GoodsDTO goods) {
         try {
-            return ResponseEntity.ok(goodsService.edit(goodsService.toEntity(goods)));
+            return ResponseEntity.ok(goodsService.edit(goodsService.toEntity(goods)).getId());
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("error happened");
         }
