@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styles from './App.module.scss';
 import Footer from './components/statics/Footer';
 import Header from './components/statics/Header';
@@ -14,6 +14,7 @@ function App() {
 
   const [activeTab, setActiveTab] = useState(TABS.Outcoming);
   const [language, setlang] = useState(LANGUAGES.EN);
+  const footerRef = useRef<HTMLDivElement>() as React.MutableRefObject<HTMLDivElement>;
 
   return (<div className={styles.app}>
     <Header
@@ -21,7 +22,7 @@ function App() {
       setActiveTab={setActiveTab}
       switchLang={setlang}
       language={language} />
-    <div>
+    <div style={{ paddingBottom: footerRef.current ? footerRef.current.clientHeight + 'px' : '20px' }}>
       {activeTab === TABS.Products && <Products language={language} />}
       {activeTab === TABS.Clients && <Clients language={language} />}
       {activeTab === TABS.Storage && <Storage language={language} />}
@@ -29,7 +30,7 @@ function App() {
       {activeTab === TABS.Outcoming && <Outcoming language={language} />}
       {activeTab === TABS.Goods && <Goods language={language} />}
     </div>
-    <Footer />
+    <Footer mainRef={footerRef} />
   </div>
   );
 }
